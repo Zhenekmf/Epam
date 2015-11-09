@@ -10,23 +10,19 @@ public class PropertyReader {
 	private String teststring;
 	private int broken;
 
-	public PropertyReader() throws NumberFormatException,
-			FileNotFoundException, IOException {
+	public PropertyReader() throws FileNotFoundException, IOException,
+			IllegalArgumentException {
 		Properties props = new Properties();
 		props.load(new FileInputStream(new File("./config/props1.properties")));
-		try {
-			testint = Integer.valueOf(props.getProperty("testint"));
-			testdouble = Double.valueOf(props.getProperty("testdouble"));
-			teststring = props.getProperty("teststring");
-			
-			 broken=Integer.valueOf(props.getProperty("brokenfield"));
-			 
-			 //strange, but works
-			Object nonex = props.getProperty("NonExistKey");
-		} catch (IllegalArgumentException e) {
-			System.err.println("Wrong argument it property file");
 
-		}
+		testint = Integer.valueOf(props.getProperty("testint"));
+		testdouble = Double.valueOf(props.getProperty("testdouble"));
+		teststring = props.getProperty("teststring");
+
+		broken = Integer.valueOf(props.getProperty("brokenfield"));
+
+		// strange, but works
+		Object nonex = props.getProperty("NonExistKey");
 
 	}
 
